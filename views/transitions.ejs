@@ -162,7 +162,7 @@
                                         <%props.forEach((e)=>{ %>
                                             <input type="number" name="recAmount" placeholder="Amount"
                                                 class="form-control my-1" id="recAmountId" min="1"
-                                                max="<%=e.currentBalance%>">
+                                                max="<%=e.currentBalance%>" required>
                                             <%})%>
                                         <label for="recAmount"></label>
                                     </div>
