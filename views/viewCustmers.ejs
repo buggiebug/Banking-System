@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        BS - <%= title %>
+    </title>
+
+    <!-- Font Awesomse used for logo -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--!  BootStrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        ::-webkit-scrollbar{
+            width: 0;
+        }
+        #showBox{
+            display: none;
+            border: 2px solid red;
+            height: 60vh;
+            width: 40vh;
+        }
+        .container{
+            overflow: scroll;
+        }
+        .fa-user-times{
+            font-size: 18px;
+            position: relative;
+            left: 20px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!--! Adding navbar compnent -->
+    <%- include('./components/navbar'); -%>
+
+    <div style="padding: 0% 3%;">
+        <h2 class=" my-2 py-1 text-center bg-warning text-dark">All Custmers</h2>
+    </div>
+
+    <!--! This Div Contain table which shows custmers... -->
+        <div class="container">
+            <table class="table my-2">
+                <thead class="bg-dark text-warning">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">View & Transfer</th>
+                        <th scope="col">Delete Account</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(props.length!="" ){ %>
+                        <% props.map((e)=>{ %>
+                            <tr>
+                                <td>
+                                    <%= e.name %>
+                                </td>
+                                <td>
+                                    <%= e.email %>
+                                </td>
+                                <td>
+                                    <a href="/transitions/<%= e._id%>" class="mx-1">
+                                        <button type="button" class="btn btn-sm btn-info">View & Transfer</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/del/<%= e._id%>" class="mx-1 dels">
+                                        <i class="fas fa-user-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <!--! If no records found then show this message -->
+                            <% })}else{ %>
+                                <tr>
+                                    <td class="bg-warning">No custmer found please add any.</td>
+                                </tr>
+                            <% } %>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            // ! Show alert message when custmer deleted...
+            var del = document.querySelectorAll(".dels");
+            del.forEach((e)=>{
+                e.addEventListener("click",()=>{
+                    alert("Account deleted successfully.");
+                });
+            })
+        </script>
+    </body>
+</html>
+

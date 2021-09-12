@@ -1,0 +1,29 @@
+{
+  "name": "tsf-project",
+  "version": "1.0.0",
+  "description": "this is my first task which is given by {The Spark Foundation}",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BuggIeBUG/Basic-Banking-System---WebApp.git"
+  },
+  "author": "Shubham Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BuggIeBUG/Basic-Banking-System---WebApp/issues"
+  },
+  "homepage": "https://github.com/BuggIeBUG/Basic-Banking-System---WebApp#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "express-generator": "^4.2.0",
+    "mongoose": "^6.0.4",
+    "nodemon": "^2.0.12"
+  }
+}

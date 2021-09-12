@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS - Transfer History</title>
+
+    <!--! Font Awesomse used for logo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--!  BootStrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .container {
+            overflow-x: scroll;
+        }
+        i{
+            font-size: 16px;
+            color: rgb(255, 51, 0);
+        }
+
+    </style>
+    
+</head>
+
+<body>
+
+    <!--! Adding navbar compnent -->
+    <%- include('./components/navbar'); -%>
+
+        <!--! This Div contain search bar which searches history by search type... -->
+        <div style="padding: 0% 3%;">
+            <h2 class="text-center btn-danger my-2 py-1">Transfer History</h2>
+            <div class="d-flex justify-content-evenly my-5">
+                <form action="/search" method="post" class="d-flex">
+                    <select name="selectSearch" class="mx-1 px-1">
+                        <option>All</option>
+                        <option>Sender</option>
+                        <option>Receiver</option>
+                    </select>
+                    <input type="email" name="searchEmail" placeholder="Search by Email" class="form-control mx-1">
+                    <input type="submit" value="Search" class="btn btn-danger mx-1">
+                </form>
+            </div>
+        </div>
+
+        <!--! This Div contain table which shows transition history -->
+        <div class="container">
+            <table class="table my-2" id="tableSlide">
+                <thead class="bg-dark text-danger">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Sender</th>
+                        <th scope="col">Receiver</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(hist.length!="" ){ %>
+                        <% hist.map((e)=>{ %>
+                            <tr>
+                                <td>
+                                    <%= e.date %>
+                                </td>
+                                <td>
+                                    <%= e.semail %>
+                                </td>
+                                <td>
+                                    <%= e.remail %>
+                                </td>
+                                <td>
+                                    <%= e.amount %>
+                                </td>
+                                <td>
+                                    <a href="/delHist/<%=e._id%>" class="mx-1">
+                                        <i class="fas fa-minus-circle"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <!--! If no records found then show this message -->
+                            <% })}else{ %>
+                                <tr>
+                                    <td class="bg-dark text-light">No records found.</td>
+                                </tr>
+                            <% } %>
+                </tbody>
+            </table>
+        </div>
+
+</body>
+
+</html>

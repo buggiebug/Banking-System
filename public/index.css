@@ -1,0 +1,97 @@
+/* ! Custom CSS for index.html */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  position: sticky !important;
+  top: 0px;
+  z-index: 2;
+}
+
+/* ! fro Main CSS start from here... */
+main {
+  /* border: 2px solid rgb(24, 3, 3); */
+  margin: 100px 0px;
+}
+
+.main-child {
+  /* border: 2px solid rgb(22, 240, 51); */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.main-child div {
+  border: 2px solid black;
+  border-radius: 28px;
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-child div:hover {
+  border-color: rgb(236, 252, 16);
+  background-color: black;
+  transition: all 0.3s ease-in;
+}
+
+.main-child div:hover .btn {
+  background-color: white;
+  color: black;
+  transition: all 0.4s ease-in;
+}
+
+main .main-child div a {
+  text-decoration: none;
+}
+
+main button {
+  position: relative;
+  top: 16px;
+}
+
+/* ! this is for fab icon */
+.fa,
+.far,
+.fas {
+  font-family: "Font Awesome 5 Free";
+  font-size: 62px;
+}
+
+.main-child div:hover .fa,
+.main-child div:hover .far,
+.main-child div:hover .fas {
+  color: white;
+  font-size: 70px;
+  transition: all 0.4s ease-in;
+}
+
+/* ! fro Main CSS start from here... */
+
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  bottom: 0px;
+}
+
+footer div {
+  position: relative;
+  top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    footer {
+      position: relative;
+      top: 30px;
+    }
+}

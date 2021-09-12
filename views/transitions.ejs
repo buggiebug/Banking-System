@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS - View & Transfer</title>
+
+    <!-- Font Awesomse used for logo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--  BootStrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        #backBtn {
+            position: relative;
+            top: 25px;
+            left: 45px;
+        }
+
+        #hideAlert {
+            position: absolute;
+            width: 100%;
+            z-index: 4;
+        }
+
+        #recAmountId:in-range {
+            background-color: rgb(255, 255, 255);
+        }
+
+        #recAmountId:out-of-range {
+            background-color: rgb(255 0 0 / 18%);
+            color: black;
+        }
+
+        #recAmountId:in-range+label::after {
+            content: "";
+        }
+
+        #recAmountId:out-of-range+label::after {
+            content: "Please try with lower amount";
+            font-size: 14px;
+            position: relative;
+            color: #f10202;
+            text-shadow: 1px 1px black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!--! Adding navbar compnent -->
+    <%- include('./components/navbar'); -%>
+
+        <!--! Alert message show by type of alert-->
+        <% if(msg.length !="" ){ %>
+            <div class="alert alert-<%= type %> rounded-0" role="alert" id="hideAlert">
+                <%= msg %>
+            </div>
+            <% } %>
+                <a href="/viewCustmers"><button type="button" class="btn btn-primary" id="backBtn"><i
+                            class="fas fa-arrow-circle-left"></i></button></a>
+                <!--! This is main Div of this page which has grid property -->
+                <div class="container">
+                    <div class="row">
+
+                        <!--! This is first box of grid which contain user details -->
+                        <div class="col">
+                            <div class="container">
+                                <div class="container my-5">
+                                    <div class="card">
+                                        <div class="container my-1">
+                                            <div style="text-align: center;padding-top: 35px;"><i
+                                                    class="fas fa-user-tie"
+                                                    style="font-size: 100px;color: #508aa7d4;"></i></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <%props.forEach((e)=>{ %>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <strong>Name : </strong>
+                                                        <%= e.name.toUpperCase() %>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <strong>Email : </strong>
+                                                        <%= e.email.toUpperCase() %>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <strong>Phone no : </strong>
+                                                        <%= e.phoneNo %>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <strong>Balance : </strong>
+                                                        <%= e.currentBalance %>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <strong>Last CR : </strong>
+                                                        <%= e.creditBalance%>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <strong>Last DB : </strong>
+                                                        <%= e.debitBalance %>
+                                                    </li>
+                                                </ul>
+                                                <% })%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--! This is second part of grid which contain transfer box -->
+                        <div class="col">
+                            <div class="container">
+                                <div>
+                                    <h2 class="text-center my-2 text-secondary py-1">Transfer Money</h2>
+                                </div>
+                                <form class="container" action="/sended" method="POST">
+                                    <p class="my-1"><strong>Form</strong></p>
+
+                                    <!--! This {props} is fetch sender details -->
+                                    <div class="form-group">
+                                        <%props.forEach((e)=>{ %>
+                                            <input type="hidden" name="senderId" value="<%= e._id %>"
+                                                class="form-control my-1">
+                                            <input type="text" name="senderName" value="<%= e.name %>"
+                                                class="form-control my-1" readonly>
+                                            <input type="text" name="senderEmail" value="<%=e.email%>"
+                                                class="form-control my-1" readonly>
+                                            <input type="hidden" name="senderAmount" value="<%=e.currentBalance%>"
+                                                class="form-control my-1">
+                                            <% })%>
+                                    </div>
+                                    <p class="my-1"><strong>To</strong></p>
+
+                                    <!--! This {users} fetch all users in database -->
+                                    <div class="form-group">
+                                        <select name="recName" class="form-control my-2" id="exampleFormControlSelect1">
+                                            <option>Name</option>
+                                            <%users.map((e)=>{ %>
+                                                <option>
+                                                    <%=e.name%>
+                                                </option>
+                                                <%})%>
+                                        </select>
+                                        <select name="recEmail" class="form-control my-2"
+                                            id="exampleFormControlSelect1">
+                                            <option>Email</option>
+                                            <%users.map((e)=>{ %>
+                                                <option>
+                                                    <%=e.email%>
+                                                </option>
+                                                <%})%>
+                                        </select>
+
+                                        <!--|| here sender amount is used for showing minimum maximum amount & alert message for receiver... -->
+                                        <%props.forEach((e)=>{ %>
+                                            <input type="number" name="recAmount" placeholder="Amount"
+                                                class="form-control my-1" id="recAmountId" min="1"
+                                                max="<%=e.currentBalance%>">
+                                            <%})%>
+                                        <label for="recAmount"></label>
+                                    </div>
+                                    <input type="submit" value="Send" class="btn btn-danger my-2">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--! Adding script for hide alert message -->
+                <script>
+                    var hideAlert = document.getElementById("hideAlert");
+                    setTimeout(() => {
+                        hideAlert.style.display = "none";
+                    }, 2000);
+                </script>
+</body>
+
+</html>
