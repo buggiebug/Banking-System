@@ -142,20 +142,26 @@
                                     <div class="form-group">
                                         <select name="recName" class="form-control my-2" id="exampleFormControlSelect1">
                                             <option>Name</option>
+                                            <!-- - Here terenary operator is used to disable sender details on receiver section... -->
                                             <%users.map((e)=>{ %>
-                                                <option>
-                                                    <%=e.name%>
-                                                </option>
+                                                <%props.forEach((c)=>{ %>
+                                                    <option <%=e.name===c.name?"disabled":"enabled"%>>
+                                                        <%=e.name%>
+                                                    </option>
                                                 <%})%>
+                                            <%})%>
                                         </select>
                                         <select name="recEmail" class="form-control my-2"
                                             id="exampleFormControlSelect1">
                                             <option>Email</option>
+                                            <!-- - Here terenary operator is used to disable sender details on receiver section... -->
                                             <%users.map((e)=>{ %>
-                                                <option>
-                                                    <%=e.email%>
-                                                </option>
+                                                <%props.forEach((c)=>{ %>
+                                                    <option <%=e.email===c.email?"disabled":"enabled"%>>
+                                                        <%=e.email%>
+                                                    </option>
                                                 <%})%>
+                                            <%})%>
                                         </select>
 
                                         <!--|| here sender amount is used for showing minimum maximum amount & alert message for receiver... -->
