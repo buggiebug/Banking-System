@@ -1,13 +1,11 @@
-# Banking-System-webApp
+# Banking System webApp
 
-1. This is sample of Banking System with basic features.
+#### This webApp is hosted on `cyclic.sh`
+You can see the features of the app via 
+##### https://basicbankingsystem.cyclic.app/
 
-2. The website is designed by using :-
-
-(i). Front-END tools : HTML CSS JavaSrcipt & BootStrap
-(ii). Back-End tools : ExpressJS & NodeJS
-(iii). Database : MongoDB
-
-3. The link of website is given below:-
-
-https://bankingsystemwebapp.herokuapp.com/
+This is sample of Banking System with basic features.
+The website is designed by using :-
+1. Front-End Tools : HTML CSS JavaSrcipt & BootStrap
+2. Back-End Tools : ExpressJs & NodeJs
+3. Database : MongoDB
